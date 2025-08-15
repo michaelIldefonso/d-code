@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BRAILLE</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+    <!-- Navbar / Header -->
+    <div id="navbar"></div>
+
+    <!-- Main Content -->
+    <div class="justify-center items-center text-center">
+      <h1 class="py-5 text-2xl">Press any key from 1-6.</h1>
+    </div>
+    <div class="flex px-8 py-5">
+      <!-- First Inner Div: Text + GIF Area (80%) -->
+      <div class="w-4/5 flex justify-center items-center">
+        <div
+          class="w-[90%] h-[80vh] bg-[url('./images/monitorcut.png')] bg-cover flex flex-row justify-center items-center rounded-xl p-8 space-y-8 gap-10"
+        >
+          <!-- Text Area -->
+          <p
+            id="word"
+            class="text-5xl font-bold text-blue-700 text-center leading-relaxed"
+          ></p>
+
+          <!-- GIF Area -->
+          <img
+            id="gif"
+            src=""
+            class="w-full max-w-[500px] object-contain rounded-3xl"
+          />
+        </div>
+      </div>
+
+      <!-- Second Inner Div: Extra Space (20%) -->
+      <div
+        class="w-1/5 h-[25vh] flex flex-col gap-6 bg-gray-500 rounded-xl p-4"
+      >
+        <!-- Toggle 1 -->
+        <div
+          class="flex flex-row justify-between bg-white px-4 py-2 rounded-md"
+        >
+          <p>See the Word</p>
+          <label class="relative inline-block w-14 h-8">
+            <input
+              id="toggle-word"
+              type="checkbox"
+              checked
+              class="sr-only peer"
+            />
+            <div
+              class="w-full h-full bg-gray-300 peer-checked:bg-blue-500 rounded-full transition-colors duration-300"
+            ></div>
+            <div
+              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6"
+            ></div>
+          </label>
+        </div>
+
+        <!-- Toggle 2 -->
+        <div
+          class="flex flex-row justify-between bg-white px-4 py-2 rounded-md"
+        >
+          <p>See the Gesture of the word</p>
+          <label class="relative inline-block w-14 h-8">
+            <input
+              id="toggle-gif"
+              type="checkbox"
+              checked
+              class="sr-only peer"
+            />
+            <div
+              class="w-full h-full bg-gray-300 peer-checked:bg-blue-500 rounded-full transition-colors duration-300"
+            ></div>
+            <div
+              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6"
+            ></div>
+          </label>
+        </div>
+
+        <!-- Toggle 3 -->
+        <div
+          class="flex flex-row justify-between bg-white px-4 py-2 rounded-md"
+        >
+          <p>Hear the sound of the word</p>
+          <label class="relative inline-block w-14 h-8">
+            <input
+              id="toggle-sound"
+              type="checkbox"
+              checked
+              class="sr-only peer"
+            />
+            <div
+              class="w-full h-full bg-gray-300 peer-checked:bg-blue-500 rounded-full transition-colors duration-300"
+            ></div>
+            <div
+              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6"
+            ></div>
+          </label>
+        </div>
+      </div>
+      <!-- Textbox with clear all button -->
+    </div>
+    <!-- Javascript -->
+    <script src="app.js" defer></script>
+  </body>
+</html>
