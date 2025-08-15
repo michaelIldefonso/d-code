@@ -1,16 +1,9 @@
 /* Top navigation button static styles */
 
 
-body {
-  background-image: url('bground.png');
-  background-color: #cccccc;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-}
 
-.main-center {
+
+.start-container {
   position: fixed;
   left: 50%;
   bottom: 15%;
@@ -35,35 +28,6 @@ body {
   background-color: #d2d49a;
 }
 
-.top-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 16px;
-  padding: 16px 32px 0 0;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: auto;
-  border-radius: 16px;
-  z-index: 10;
-  backdrop-filter: blur(4px);
-}
 
-.nav-btn {
-  border: 1px solid #376dac;
-  padding: 10px 22px;
-  margin: 0;
-  border-radius: 20px;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #222;
-  cursor: pointer;
-  background-color: #eceee0;
-}
 
 /* Link styles */
-a {
-    text-decoration: none;
-}
