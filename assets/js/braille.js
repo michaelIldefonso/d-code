@@ -6,21 +6,11 @@ const toggleSound = document.getElementById("toggle-sound");
 let sound = true;
 
 toggleWord.addEventListener("change", function () {
-  if (toggleWord.checked) {
-    word.style.display = "block";
-    //add sounds when toggled on and off
-  } else {
-    word.style.display = "none";
-  }
+  word.style.display = toggleWord.checked ? "block" : "none";
 });
 
 toggleGif.addEventListener("change", function () {
-  if (toggleGif.checked) {
-    gif.style.display = "block";
-    //add sounds when toggled on and off
-  } else {
-    gif.style.display = "none";
-  }
+  gif.style.display = toggleGif.checked ? "block" : "none";
 });
 
 toggleSound.addEventListener("change", function () {
@@ -41,26 +31,33 @@ const gifs = {
   1: "/assets/images/hi.gif",
   2: "/assets/images/iloveyou.gif",
   3: "/assets/images/goodluck.gif",
+  4: "/assets/images/goodmorning.gif",
+  5: "/assets/images/goodbye.gif",
+  6: "/assets/images/thankyou.gif",
 };
 
-// On keydown event, display a random word
+// On keydown event, display a word + gif
 document.addEventListener("keydown", function (event) {
   const keyPressed = event.key;
 
   if (words[keyPressed]) {
     const message = words[keyPressed];
     word.textContent = message;
+
+    // Ensure gif stays responsive
     gif.src = gifs[keyPressed] || "";
+    gif.classList.add(
+      "w-full",
+      "max-w-[300px]",
+      "lg:max-w-[500px]",
+      "object-contain",
+      "rounded-3xl"
+    );
 
     if (sound) {
-      // Cancel all ongoing word
-      speechSynthesis.cancel();
-
-      // Speak the word
+      speechSynthesis.cancel(); // Cancel any ongoing speech
       const utter = new SpeechSynthesisUtterance(message);
-      // 🔊 Set slower speech rate (0.5–1.0 is good)
-      utter.rate = 0.6;
-
+      utter.rate = 0.6; // Slow & clear speech
       speechSynthesis.speak(utter);
     }
   }

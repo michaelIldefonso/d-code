@@ -15,36 +15,38 @@
     <div class="justify-center items-center text-center">
       <h1 class="pt-5 text-2xl">Press any key from 1-6.</h1>
     </div>
-    <div class="flex px-8 py-5">
-      <!-- First Inner Div: Text + GIF Area (80%) -->
-      <div class="w-4/5 flex justify-center items-center">
+
+    <!-- Responsive Wrapper -->
+    <div class="flex flex-col lg:flex-row px-4 lg:px-8 py-5 gap-6">
+      <!-- First Inner Div: Text + GIF Area -->
+      <div class="w-full lg:w-4/5 flex justify-center items-center">
         <div
-          class="w-[90%] h-[80vh] bg-[url('/assets/images/monitor.jpg')] bg-cover flex flex-row justify-center items-center rounded-xl p-8 space-y-8 gap-10"
+          class="w-full h-[60vh] lg:h-[80vh] bg-[url('/assets/images/monitor.jpg')] bg-cover flex flex-col lg:flex-row justify-center items-center rounded-xl p-6 lg:p-8 gap-6 lg:gap-10"
         >
           <!-- Text Area -->
           <p
             id="word"
-            class="text-5xl font-bold text-blue-700 text-center leading-relaxed"
+            class="text-3xl lg:text-5xl font-bold text-blue-700 text-center leading-relaxed"
           ></p>
 
           <!-- GIF Area -->
           <img
             id="gif"
             src=""
-            class="w-full max-w-[500px] object-contain rounded-3xl"
+            class="w-full max-w-[300px] lg:max-w-[500px] object-contain rounded-3xl"
           />
         </div>
       </div>
 
-      <!-- Second Inner Div: Extra Space (20%) -->
+      <!-- Second Inner Div: Toggles -->
       <div
-        class="w-1/5 h-[25vh] flex flex-col gap-6 bg-gray-500 rounded-xl p-4"
+        class="w-full lg:w-1/5 h-auto lg:h-[25vh] flex flex-col gap-6 bg-gray-500 rounded-xl p-4"
       >
         <!-- Toggle 1 -->
         <div
-          class="flex flex-row justify-between bg-white px-4 py-2 rounded-md"
+          class="flex flex-row justify-between items-center bg-white px-4 py-2 rounded-md"
         >
-          <p>See the Word</p>
+          <p class="text-sm lg:text-base">See the Word</p>
           <label class="relative inline-block w-14 h-8">
             <input
               id="toggle-word"
@@ -63,9 +65,9 @@
 
         <!-- Toggle 2 -->
         <div
-          class="flex flex-row justify-between bg-white px-4 py-2 rounded-md"
+          class="flex flex-row justify-between items-center bg-white px-4 py-2 rounded-md"
         >
-          <p>See the Gesture of the word</p>
+          <p class="text-sm lg:text-base">See the Gesture</p>
           <label class="relative inline-block w-14 h-8">
             <input
               id="toggle-gif"
@@ -84,9 +86,9 @@
 
         <!-- Toggle 3 -->
         <div
-          class="flex flex-row justify-between bg-white px-4 py-2 rounded-md"
+          class="flex flex-row justify-between items-center bg-white px-4 py-2 rounded-md"
         >
-          <p>Hear the sound of the word</p>
+          <p class="text-sm lg:text-base">Hear the Sound</p>
           <label class="relative inline-block w-14 h-8">
             <input
               id="toggle-sound"
@@ -103,8 +105,8 @@
           </label>
         </div>
       </div>
-      <!-- Textbox with clear all button -->
     </div>
+
     <!-- Javascript -->
     <script src="/assets/js/navbar.js"></script>
     <script src="/assets/js/braille.js" defer></script>
