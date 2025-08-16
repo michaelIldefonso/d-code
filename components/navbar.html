@@ -1,0 +1,25 @@
+<nav class="relative flex items-center justify-between px-10 py-4 bg-[#376dac]">
+  <!-- Logo -->
+  <div class="flex items-center gap-6">
+    <img src="/assets/images/eye logo.png" alt="eye logo" class="h-12 w-14" />
+    <h1 class="font-bold text-3xl text-[#eceee0]">DCODE</h1>
+  </div>
+
+  <!-- Hamburger (shown on small screens by JS) -->
+  <button
+    id="hamburger"
+    class="lg:hidden flex flex-col justify-between w-8 h-6"
+  >
+    <span class="block w-8 h-0.5 bg-white rounded"></span>
+    <span class="block w-8 h-0.5 bg-white rounded"></span>
+    <span class="block w-8 h-0.5 bg-white rounded"></span>
+  </button>
+
+  <!-- Nav Links (JS will switch layout/classes for mobile/desktop) -->
+  <div id="nav-links" class="flex gap-4">
+    <a href="home.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="mission.html">Mission</a>
+    <a href="privacy.html">Privacy and Terms</a>
+  </div>
+</nav>
