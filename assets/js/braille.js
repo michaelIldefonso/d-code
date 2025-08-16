@@ -1,23 +1,3 @@
-// js/app.js
-
-// Navbar loading script
-document.addEventListener("DOMContentLoaded", function () {
-  fetch("partials/navbar.html")
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById("navbar").innerHTML = data;
-
-      // Check if we're on learn.html
-      const currentPage = window.location.pathname;
-      if (currentPage.includes("learn.html")) {
-        const backLink = document.getElementById("back-link");
-        if (backLink) {
-          backLink.classList.remove("hidden");
-        }
-      }
-    });
-});
-
 const toggleWord = document.getElementById("toggle-word");
 const word = document.getElementById("word");
 const toggleGif = document.getElementById("toggle-gif");
@@ -28,7 +8,7 @@ let sound = true;
 toggleWord.addEventListener("change", function () {
   if (toggleWord.checked) {
     word.style.display = "block";
-    //add sounds when toggled on and off//////////////////////////////
+    //add sounds when toggled on and off
   } else {
     word.style.display = "none";
   }
@@ -37,7 +17,7 @@ toggleWord.addEventListener("change", function () {
 toggleGif.addEventListener("change", function () {
   if (toggleGif.checked) {
     gif.style.display = "block";
-    //add sounds when toggled on and off//////////////////////////////
+    //add sounds when toggled on and off
   } else {
     gif.style.display = "none";
   }
@@ -58,9 +38,9 @@ const words = {
 };
 
 const gifs = {
-  1: "./images/hi.gif",
-  2: "./images/iloveyou.gif",
-  3: "./images/goodluck.gif",
+  1: "/assets/images/hi.gif",
+  2: "/assets/images/iloveyou.gif",
+  3: "/assets/images/goodluck.gif",
 };
 
 // On keydown event, display a random word

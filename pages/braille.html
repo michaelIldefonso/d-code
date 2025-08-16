@@ -3,10 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BRAILLE</title>
-
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <title>BRAILLE</title>
   </head>
   <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
     <!-- Navbar / Header -->
@@ -14,13 +13,13 @@
 
     <!-- Main Content -->
     <div class="justify-center items-center text-center">
-      <h1 class="py-5 text-2xl">Press any key from 1-6.</h1>
+      <h1 class="pt-5 text-2xl">Press any key from 1-6.</h1>
     </div>
     <div class="flex px-8 py-5">
       <!-- First Inner Div: Text + GIF Area (80%) -->
       <div class="w-4/5 flex justify-center items-center">
         <div
-          class="w-[90%] h-[80vh] bg-[url('./images/monitorcut.png')] bg-cover flex flex-row justify-center items-center rounded-xl p-8 space-y-8 gap-10"
+          class="w-[90%] h-[80vh] bg-[url('/assets/images/monitor.jpg')] bg-cover flex flex-row justify-center items-center rounded-xl p-8 space-y-8 gap-10"
         >
           <!-- Text Area -->
           <p
@@ -107,6 +106,7 @@
       <!-- Textbox with clear all button -->
     </div>
     <!-- Javascript -->
-    <script src="app.js" defer></script>
+    <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/braille.js" defer></script>
   </body>
 </html>
