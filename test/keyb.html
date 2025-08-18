@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>BRAILLE</title>
+  <script src="/assets/js/navbar.js"></script>
+  </head>
+  <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
+    <!-- Navbar / Header -->
+    <div id="navbar"></div>
+
+    <!-- Main Content -->
+    <div class="justify-center items-center text-center">
+  <h1 class="pt-5 text-2xl">Type the word using letters (a-z):</h1>
+    </div>
+
+    <!-- Responsive Wrapper -->
+    <div class="flex flex-col lg:flex-row px-4 lg:px-8 py-5 gap-6">
+      <!-- First Inner Div: Text + GIF Area -->
+      <div class="w-full lg:w-4/5 flex flex-col justify-center items-center gap-4">
+        <!-- Input Box for AI Typing -->
+  <input id="ai-input" type="text" autocomplete="off" placeholder="Type here..." class="mb-2 px-4 py-2 border-2 border-blue-400 rounded-lg text-xl focus:outline-none focus:border-blue-600 w-full max-w-xs text-center" />
+        <div
+          class="w-full h-[60vh] lg:h-[80vh] bg-[url('/assets/images/monitor.jpg')] bg-cover flex flex-col lg:flex-row justify-center items-center rounded-xl p-6 lg:p-8 gap-6 lg:gap-10"
+        >
+          <!-- Text Area -->
+          <p
+            id="word"
+            class="text-3xl lg:text-5xl font-bold text-blue-700 text-center leading-relaxed"
+          ></p>
+
+          <!-- GIF Area -->
+          <img
+            id="gif"
+            src=""
+            class="w-full max-w-[300px] lg:max-w-[500px] object-contain rounded-3xl"
+          />
+        </div>
+      </div>
+
+      <!-- Second Inner Div: Toggles -->
+      <div
+        class="w-full lg:w-1/5 h-auto lg:h-[25vh] flex flex-col gap-6 bg-gray-500 rounded-xl p-4"
+      >
+        <!-- Toggle 1 -->
+        <div
+          class="flex flex-row justify-between items-center bg-white px-4 py-2 rounded-md"
+        >
+          <p class="text-sm lg:text-base">See the Word</p>
+          <label class="relative inline-block w-14 h-8">
+            <input
+              id="toggle-word"
+              type="checkbox"
+              checked
+              class="sr-only peer"
+            />
+            <div
+              class="w-full h-full bg-gray-300 peer-checked:bg-blue-500 rounded-full transition-colors duration-300"
+            ></div>
+            <div
+              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6"
+            ></div>
+          </label>
+        </div>
+
+        <!-- Toggle 2 -->
+        <div
+          class="flex flex-row justify-between items-center bg-white px-4 py-2 rounded-md"
+        >
+          <p class="text-sm lg:text-base">See the Gesture</p>
+          <label class="relative inline-block w-14 h-8">
+            <input
+              id="toggle-gif"
+              type="checkbox"
+              checked
+              class="sr-only peer"
+            />
+            <div
+              class="w-full h-full bg-gray-300 peer-checked:bg-blue-500 rounded-full transition-colors duration-300"
+            ></div>
+            <div
+              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6"
+            ></div>
+          </label>
+        </div>
+
+        <!-- Toggle 3 -->
+        <div
+          class="flex flex-row justify-between items-center bg-white px-4 py-2 rounded-md"
+        >
+          <p class="text-sm lg:text-base">Hear the Sound</p>
+          <label class="relative inline-block w-14 h-8">
+            <input
+              id="toggle-sound"
+              type="checkbox"
+              checked
+              class="sr-only peer"
+            />
+            <div
+              class="w-full h-full bg-gray-300 peer-checked:bg-blue-500 rounded-full transition-colors duration-300"
+            ></div>
+            <div
+              class="absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-6"
+            ></div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript -->
+  <script src="app.js" defer></script>
+  </body>
+</html>
