@@ -5,8 +5,20 @@ document.addEventListener("DOMContentLoaded", function () {
 	const inputBox = document.getElementById("ai-input");
 	const toggleWord = document.getElementById("toggle-word");
 	const toggleGif = document.getElementById("toggle-gif");
-	const gif = document.getElementById("gif");
 	const toggleSound = document.getElementById("toggle-sound");
+
+	// Dynamically create the GIF element (hidden by default)
+	let gif = document.getElementById("gif");
+	if (!gif) {
+		gif = document.createElement("img");
+		gif.id = "gif";
+		gif.style.display = "none";
+		gif.className = "w-64 h-64 object-contain rounded-md border border-gray-300 mt-4";
+		const letterImages = document.getElementById("letter-images");
+		if (letterImages && letterImages.parentNode) {
+			letterImages.parentNode.appendChild(gif);
+		}
+	}
 
 	let sound = true;
 	let currentInput = "";
@@ -21,7 +33,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		currentInput = val;
 		displayMode = "char";
 
-		// Show only the latest letter image when typing
 		const letterImages = document.getElementById("letter-images");
 		if (letterImages) {
 			letterImages.style.display = "flex";
@@ -36,12 +47,16 @@ document.addEventListener("DOMContentLoaded", function () {
 					img.className = "w-64 h-64 object-contain rounded-md border border-gray-300";
 					letterImages.appendChild(img);
 				} else if (ch === ' ') {
-					// Add a spacer for spaces
 					const spacer = document.createElement('span');
 					spacer.style.display = 'inline-block';
 					spacer.style.width = '16px';
 					letterImages.appendChild(spacer);
 				}
+				// Hide GIF if user continues typing after Enter
+				if (gif) gif.style.display = "none";
+			} else {
+				// If input is cleared, also hide GIF
+				if (gif) gif.style.display = "none";
 			}
 		}
 
@@ -53,36 +68,52 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 
-	// On Enter -> show full sentence (do not clear textarea)
-	inputBox.addEventListener("keydown", (e) => {
-		if (e.key === "Enter") {
-			e.preventDefault(); // prevent newline in textarea
-			const inputSentence = inputBox.value.trim();
-			const letterImages = document.getElementById("letter-images");
-			if (inputSentence.length > 0) {
-				displayMode = "sentence";
-				currentInput = inputSentence;
-				wordDisplay.textContent = currentInput;
-				// Hide letter images when showing sentence
-				if (letterImages) {
-					letterImages.style.display = "none";
-					letterImages.innerHTML = "";
-				}
+		// On Enter -> show full sentence (do not clear textarea)
+		inputBox.addEventListener("keydown", (e) => {
+			if (e.key === "Enter") {
+				e.preventDefault(); // prevent newline in textarea
+				const inputSentence = inputBox.value.trim();
+				const letterImages = document.getElementById("letter-images");
+				if (inputSentence.length > 0) {
+					displayMode = "sentence";
+					currentInput = inputSentence;
+					wordDisplay.textContent = currentInput;
+					// Hide letter images when showing sentence
+					if (letterImages) {
+						letterImages.style.display = "none";
+						letterImages.innerHTML = "";
+					}
 
-				if (sound) {
-					speechSynthesis.cancel();
-					const utter = new SpeechSynthesisUtterance(currentInput);
-					utter.rate = 1.0;
-					speechSynthesis.speak(utter);
+					// Show GIF if the word matches a supported word
+									// Normalize input for 'thank you', 'thank', 'thanks' to 'thank_you' (not 'thankyou')
+									let wordKey = inputSentence.toLowerCase().replace(/[^a-z ]/g, "").trim();
+									if (wordKey === "thank you" || wordKey === "thank" || wordKey === "thanks") {
+										wordKey = "thank_you";
+									}
+									const supportedWords = ["hello", "yes", "no", "sorry", "thank_you"];
+									if (supportedWords.includes(wordKey) && toggleGif.checked) {
+										gif.src = `/assets/images/words/${wordKey}.gif`;
+										gif.alt = wordKey;
+										gif.style.display = "block";
+									} else {
+										gif.style.display = "none";
+									}
+
+					if (sound) {
+						speechSynthesis.cancel();
+						const utter = new SpeechSynthesisUtterance(currentInput);
+						utter.rate = 1.0;
+						speechSynthesis.speak(utter);
+					}
+				} else {
+					wordDisplay.textContent = "Type something!";
+					gif.style.display = "none";
+					setTimeout(() => {
+						wordDisplay.textContent = "";
+					}, 1000);
 				}
-			} else {
-				wordDisplay.textContent = "Type something!";
-				setTimeout(() => {
-					wordDisplay.textContent = "";
-				}, 1000);
 			}
-		}
-	});
+		});
 
 
 	// Helper function to speak a message
@@ -110,15 +141,32 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 
-	// Toggle GIF (photo) visibility
-	toggleGif.addEventListener("change", function () {
-		gif.style.display = toggleGif.checked ? "block" : "none";
-		if (toggleGif.checked) {
-			speakMessage("gestures on");
-		} else {
-			speakMessage("gestures off");
-		}
-	});
+		// Toggle GIF (photo) visibility
+		toggleGif.addEventListener("change", function () {
+			// Only show GIF if a supported word is currently displayed and toggle is on
+			if (displayMode === "sentence" && currentInput.trim().length > 0) {
+				// Normalize input for 'thank you', 'thank', 'thanks' to 'thank_you' (not 'thankyou')
+				let wordKey = currentInput.toLowerCase().replace(/[^a-z ]/g, "").trim();
+				if (wordKey === "thank you" || wordKey === "thank" || wordKey === "thanks") {
+					wordKey = "thank_you";
+				}
+				const supportedWords = ["hello", "yes", "no", "sorry", "thank_you"];
+				if (supportedWords.includes(wordKey) && toggleGif.checked) {
+					gif.src = `/assets/images/words/${wordKey}.gif`;
+					gif.alt = wordKey;
+					gif.style.display = "block";
+				} else {
+					gif.style.display = "none";
+				}
+			} else {
+				gif.style.display = "none";
+			}
+			if (toggleGif.checked) {
+				speakMessage("gestures on");
+			} else {
+				speakMessage("gestures off");
+			}
+		});
 
 	// Toggle sound
 	toggleSound.addEventListener("change", function () {
