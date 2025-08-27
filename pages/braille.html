@@ -17,8 +17,8 @@
       <h1 class="pt-5 text-2xl">Type the word using letters (a-z):</h1>
     </div>
 
-    <!-- Responsive Wrapper -->
-    <div class="flex flex-col lg:flex-row px-4 lg:px-8 py-5 gap-6">
+  <!-- Responsive Wrapper -->
+  <div class="flex flex-col lg:flex-row px-4 lg:px-8 py-5 gap-6">
       <!-- First Inner Div: Text + GIF Area -->
       <div class="w-full lg:w-4/5 flex flex-col justify-center items-center gap-4">
         <div
@@ -37,10 +37,15 @@
         </div>
       </div>
 
-      <!-- Second Inner Div: Toggles -->
+      <!-- Second Inner Div: Toggles and Voice Selection -->
       <div
-        class="w-full lg:w-1/5 h-auto lg:h-[25vh] flex flex-col gap-6 bg-gray-500 rounded-xl p-4"
+        class="w-full lg:w-1/5 h-auto min-h-[420px] lg:min-h-[32rem] flex flex-col gap-6 bg-gray-500 rounded-xl p-4"
       >
+        <!-- Voice Selection Dropdown -->
+        <div class="flex flex-row justify-between items-center bg-white px-4 py-2 rounded-md">
+          <label for="voice-select" class="text-sm lg:text-base">Voice</label>
+          <select id="voice-select" class="ml-2 px-2 py-1 rounded border border-blue-400 focus:outline-none focus:border-blue-600 w-2/3 text-sm"></select>
+        </div>
         <!-- Toggle 1 -->
         <div
           class="flex flex-row justify-between items-center bg-white px-4 py-2 rounded-md"

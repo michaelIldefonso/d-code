@@ -1,11 +1,54 @@
 
 // Keyboard/Braille page logic moved from keyb.html
 document.addEventListener("DOMContentLoaded", function () {
+	// Voice selection setup (shortened)
+	const voiceSelect = document.getElementById("voice-select");
+	let voices = [], selectedVoice = null;
+
+	function populateVoiceList() {
+		const allVoices = window.speechSynthesis.getVoices();
+		const enus = allVoices.filter(v => v.lang && v.lang.toLowerCase() === 'en-us');
+		const female = enus.find(v => v.name.toLowerCase().includes('zira')) || enus[0];
+		const male = enus.find(v => v.name.toLowerCase().includes('david') && v !== female) || enus[1] || enus[0];
+		voices = [female, male].filter(Boolean);
+		if (voiceSelect) {
+			voiceSelect.innerHTML = "";
+			voices.forEach((voice, i) => {
+				const option = document.createElement("option");
+				option.value = i;
+				option.textContent = i === 0 ? 'Female (en-US)' : 'Male (en-US)';
+				voiceSelect.appendChild(option);
+			});
+			voiceSelect.value = 0;
+			selectedVoice = voices[0];
+		}
+	}
+
+	populateVoiceList();
+	if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+		speechSynthesis.onvoiceschanged = populateVoiceList;
+	}
+	if (voiceSelect) {
+		voiceSelect.addEventListener('change', function() {
+			selectedVoice = voices[this.value];
+		});
+	}
 	const wordDisplay = document.getElementById("word");
 	const inputBox = document.getElementById("ai-input");
 	const toggleWord = document.getElementById("toggle-word");
 	const toggleGif = document.getElementById("toggle-gif");
 	const toggleSound = document.getElementById("toggle-sound");
+
+	// Add Clear All button if not present
+	let clearBtn = document.getElementById("clear-all-btn");
+	if (!clearBtn && inputBox && inputBox.parentNode) {
+		clearBtn = document.createElement("button");
+		clearBtn.id = "clear-all-btn";
+		clearBtn.textContent = "Clear All";
+		clearBtn.type = "button";
+		clearBtn.className = "ml-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600";
+		inputBox.parentNode.insertBefore(clearBtn, inputBox.nextSibling);
+	}
 
 	// Dynamically create the GIF element (hidden by default)
 	let gif = document.getElementById("gif");
@@ -23,6 +66,22 @@ document.addEventListener("DOMContentLoaded", function () {
 	let sound = true;
 	let currentInput = "";
 	let displayMode = "char"; // 'char' or 'sentence'
+
+	// Clear All button logic
+	if (clearBtn) {
+		clearBtn.addEventListener("click", function () {
+			inputBox.value = "";
+			currentInput = "";
+			displayMode = "char";
+			wordDisplay.textContent = "";
+			const letterImages = document.getElementById("letter-images");
+			if (letterImages) {
+				letterImages.innerHTML = "";
+				letterImages.style.display = "flex";
+			}
+			if (gif) gif.style.display = "none";
+		});
+	}
 
 	// Only allow letters/spaces and show latest character
 	inputBox.addEventListener("input", (e) => {
@@ -103,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						speechSynthesis.cancel();
 						const utter = new SpeechSynthesisUtterance(currentInput);
 						utter.rate = 1.0;
+						if (selectedVoice) utter.voice = selectedVoice;
 						speechSynthesis.speak(utter);
 					}
 				} else {
@@ -121,6 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		speechSynthesis.cancel();
 		const utter = new SpeechSynthesisUtterance(message);
 		utter.rate = 1.0;
+		if (selectedVoice) utter.voice = selectedVoice;
 		speechSynthesis.speak(utter);
 	}
 
