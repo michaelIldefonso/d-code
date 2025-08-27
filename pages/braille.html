@@ -6,7 +6,7 @@
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <title>BRAILLE</title>
-  <script src="/assets/js/navbar.js"></script>
+    <script src="/assets/js/navbar.js"></script>
   </head>
   <body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col">
     <!-- Navbar / Header -->
@@ -14,28 +14,26 @@
 
     <!-- Main Content -->
     <div class="justify-center items-center text-center">
-      <h1 class="pt-5 text-2xl">Press any key from 1-6.</h1>
+      <h1 class="pt-5 text-2xl">Type the word using letters (a-z):</h1>
     </div>
 
     <!-- Responsive Wrapper -->
     <div class="flex flex-col lg:flex-row px-4 lg:px-8 py-5 gap-6">
       <!-- First Inner Div: Text + GIF Area -->
-      <div class="w-full lg:w-4/5 flex justify-center items-center">
+      <div class="w-full lg:w-4/5 flex flex-col justify-center items-center gap-4">
         <div
           class="w-full h-[60vh] lg:h-[80vh] bg-[url('/assets/images/monitor.jpg')] bg-cover flex flex-col lg:flex-row justify-center items-center rounded-xl p-6 lg:p-8 gap-6 lg:gap-10"
         >
-          <!-- Text Area -->
-          <p
-            id="word"
-            class="text-3xl lg:text-5xl font-bold text-blue-700 text-center leading-relaxed"
-          ></p>
+          <!-- Text Area and Letter Images -->
+          <div class="flex flex-col items-center gap-2">
+            <p
+              id="word"
+              class="text-3xl lg:text-5xl font-bold text-blue-700 text-center leading-relaxed"
+            ></p>
+            <div id="letter-images" class="flex flex-row gap-2 justify-center items-center mt-2"></div>
+          </div>
 
-          <!-- GIF Area -->
-          <img
-            id="gif"
-            src=""
-            class="w-full max-w-[300px] lg:max-w-[500px] object-contain rounded-3xl"
-          />
+
         </div>
       </div>
 
@@ -105,10 +103,20 @@
             ></div>
           </label>
         </div>
+
+        <!-- Textbox below toggles -->
+        <textarea
+          id="ai-input"
+          type="text"
+          autocomplete="off"
+          placeholder="Type here..."
+          rows="6"
+          class="mt-4 px-4 py-2 border-2 border-blue-400 rounded-lg text-xl focus:outline-none focus:border-blue-600 w-full min-h-[120px] text-center resize-y"
+        ></textarea>
       </div>
     </div>
 
     <!-- Javascript -->
-  <script src="/assets/js/braille.js" defer></script>
+    <script src="../assets/js/braille.js"></script>
   </body>
 </html>
